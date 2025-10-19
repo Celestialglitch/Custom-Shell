@@ -1,4 +1,4 @@
-<h1>Custom Unix Shell </h1>
+<h1>MiniShell </h1>
 
 A lightweight, Unix-like shell written in C, designed to demonstrate core systems programming concepts including process control, I/O redirection, piping, and signal handling. Built for clarity, extensibility, and recruiter visibility.
 
