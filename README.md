@@ -39,3 +39,37 @@ A lightweight, Unix-like shell written in C, designed to demonstrate core system
 | **File Descriptor Management**  | Handles redirection with `open()`, `dup2()`, and `close()` for clean stream control     |
 | **Signal Safety**               | Overrides default `SIGINT` behavior to maintain shell continuity                        |
 | **Modular Design**              | Separates parsing, redirection, background detection, and execution for maintainability |
+
+
+## Compilation & Example sessions
+
+To build and run the shell:
+```bash
+gcc myshell.c -o myshell
+./myshell
+
+myshell> ls -l | grep .c > out.txt
+myshell> cat < input.txt | sort | uniq
+myshell> sleep 10 &
+myshell> cd /home && pwd
+myshell> exit
+
+```
+
+## Known Limitations & Future Work
+
+### Limitations
+- Does *not* currently support logical operators such as `&&` or `||`
+- No handling of quoted strings or escape sequences (e.g., `"hello world"`) in the tokenizer
+- Limited job-control: no `jobs`, `fg`, `bg` built-ins or process-group management
+- Minimal error handling for malformed inputs or extreme edge cases
+- Background commands are not tracked in a job list and reaping of background children is minimal
+
+### Future Enhancements
+- Implement `history`, `jobs`, `fg`, and `bg` built-ins for full job control
+- Support quoting, escaping, and variable expansion in command parsing
+- Replace `signal()` with `sigaction()` for more robust signal handling
+- Use `waitpid()` with `WNOHANG` to properly reap background children and avoid zombies
+- Introduce a dedicated parsing module that supports command chaining (e.g., `&&`, `||`)
+- Add a test suite for parsing logic, redirection, and job handling
+
